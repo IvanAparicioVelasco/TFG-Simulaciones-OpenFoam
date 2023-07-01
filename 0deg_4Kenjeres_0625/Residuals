@@ -1,0 +1,14 @@
+set logscale y
+set title "Residuals"
+set ylabel 'Residuo'
+set xlabel 'Iteración'
+plot "< cat log | grep 'Solving for Ux' | cut -d' ' -f9 | tr -d ','" title 'Ux' with lines,\
+"< cat log | grep 'Solving for Uy' | cut -d' ' -f9 | tr -d ','" title 'Uy' with lines,\
+"< cat log | grep 'Solving for T' | cut -d' ' -f9 | tr -d ','" title 'T' with lines,\
+"< cat log | grep 'Solving for kt' | cut -d' ' -f9 | tr -d ','" title 'kt' with lines,\
+"< cat log | grep 'Solving for epsilont' | cut -d' ' -f9 | tr -d ','" title 'epsilont' with lines,\
+"< cat log | grep 'Solving for Q' | cut -d' ' -f9 | tr -d ','" title 'Q' with lines,\
+"< cat log | grep 'Solving for p_rgh' | cut -d' ' -f9 | tr -d ','" title 'p_rgh' with lines,\
+"< cat log | grep 'Solving for p' | cut -d' ' -f9 | tr -d ','" title 'p' with lines
+pause 1
+
