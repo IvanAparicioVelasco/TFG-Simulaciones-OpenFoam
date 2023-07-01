@@ -25,11 +25,6 @@ RASThermal
 
     printCoeffs     on;
     
-    ReynoldsAnalogyCoeffs
-    {
-        Prt 0.9;
-    }
-    
     KenjeresAHFMCoeffs
     {
         Ct1Prime  0.0;

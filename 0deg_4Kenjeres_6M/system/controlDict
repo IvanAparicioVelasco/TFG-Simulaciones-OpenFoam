@@ -19,11 +19,11 @@ application     myBuoyantBoussinesqSimpleFoam;
 
 startFrom       startTime;
 
-startTime       100000;
+startTime       80000;
 
 stopAt          endTime;
 
-endTime         150000;
+endTime         95000;
 
 deltaT          1;
 

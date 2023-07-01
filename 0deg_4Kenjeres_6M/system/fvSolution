@@ -75,16 +75,16 @@ relaxationFactors
 {
     fields
     {
-        p               0.1;
-        p_rgh           0.1;
+        p               0.3;
+        p_rgh           0.3;
         Q               0.1;
     }
     equations
     {
-        "(U|k|omega)"   0.05;
-        kt              0.05;
-        epsilont        0.05;
-        T               0.05;
+        "(U|k|omega)"   0.3;
+        kt              0.3;
+        epsilont        0.3;
+        T               0.3;
     }
 }
 
