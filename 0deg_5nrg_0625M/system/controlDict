@@ -1,0 +1,176 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  8
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "system";
+    object      controlDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+application     myBuoyantBoussinesqSimpleFoam;
+
+startFrom       startTime;
+
+startTime       0;
+
+stopAt          endTime;
+
+endTime         20000;
+
+deltaT          1;
+
+writeControl    timeStep;
+
+writeInterval   1000;
+
+purgeWrite      1;
+
+writeFormat     ascii;
+
+writePrecision  8;
+
+writeCompression off;
+
+timeFormat      general;
+
+timePrecision   6;
+
+runTimeModifiable true;
+
+functions
+{
+    forceCoeffs1
+    {
+        type forceCoeffs;
+        libs ("libforces.so");
+        writeControl timeStep;
+        writeInterval 10;
+        log true;
+        patches (airfoil);
+        rho rhoInf;                         // Indicates incompressible.
+        rhoInf 1.317;                      // Redundant for incompressible (value does not matter).
+        liftDir (0 1 0);
+        dragDir (1 0 0);
+        CofR (0.25 0 0);                    // Quarter-chord.
+        pitchAxis (0 0 1);
+        magUInf 65.4;                    // Matches 0/U.
+        lRef 1.0;                           // Normalized chord.
+        Aref 1;                             // Cell depth * chord.
+    }
+
+    #includeFunc Surfaces;
+    
+        turbulenceThermalFields1
+    {
+        type                myTurbulenceThermalFields;
+        functionObjectLibs  ("libmyFieldFunctionObjects.so");
+        enabled             true;
+        writeControl        timeStep;
+        writeInterval       1000;
+        prefix              false;
+        fields
+        (
+            Qeff
+            Qlam
+            /*
+            Qeff        // Effective HF
+            Qlam        // Laminar HF
+            alphat      // turbulence thermal diffusivity (difusividad termica turbulenta)
+            alphaEff    // effective turbulence thermal diffusivity
+            */
+        );
+    }
+    
+    gradT
+    {
+        type myGrad;
+        functionObjectLibs ("libmyFieldFunctionObjects.so");
+        resetOnOutput   false;
+        resetOnRestart  false;
+        executeControl      writeTime;
+        writeControl        writeTime;
+        write            true;
+        field T;
+    }
+    
+        wallGradT1
+    {
+        type wallGradT;
+        functionObjectLibs ("libmyFieldFunctionObjects.so");
+        resetOnOutput   false;
+        resetOnRestart  false;
+        executeControl      writeTime;
+        writeControl        writeTime;
+        write            true;
+        patches ("airfoil");
+    }
+    
+         wallMagSf1
+    {
+        type wallMagSf;
+        functionObjectLibs ("libmyFieldFunctionObjects.so");
+        resetOnOutput   false;
+        resetOnRestart  false;
+        executeControl      writeTime;
+        writeControl        writeTime;
+        write            true;
+        patches ("airfoil");
+    }
+    
+    mySurfaces
+    {
+
+        type surfaces;
+
+        setFormat raw;
+
+        surfaceFormat raw;
+
+        interpolationScheme cellPoint;
+
+        writeControl    outputTime;
+
+        fields
+        (
+            U
+            wallShearStress
+            T
+            Prt
+            gradT
+            wallGradT
+            wallMagSf
+            gradU
+            kt
+            epsilont
+            k
+            epsilon
+            alphat
+            nut
+            Pk
+            Pt
+            R
+            Q
+            Qlam
+        );
+
+        surfaces
+        (
+            wall
+            {
+                type    patch;
+                patches ("airfoil");
+            }
+        );
+    }
+}
+
+
+// ************************************************************************* //
