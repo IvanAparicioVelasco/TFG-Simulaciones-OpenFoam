@@ -1,0 +1,39 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+  =========                 |
+  \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox
+   \\    /   O peration     | Website:  https://openfoam.org
+    \\  /    A nd           | Version:  8
+     \\/     M anipulation  |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version     2.0;
+    format      ascii;
+    class       dictionary;
+    location    "constant";
+    object      momentumTransport;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+simulationThermalType RASThermal;
+
+RASThermal
+{
+    RASThermalModel        KenjeresAHFM;
+
+    turbulenceThermal      on;
+
+    printCoeffs     on;
+    
+    ReynoldsAnalogyCoeffs
+    {
+        Prt 0.9;
+    }
+    
+    KenjeresAHFMCoeffs
+    {
+        Ct1Prime  0.0;
+    }
+}
+
+// ************************************************************************* //
