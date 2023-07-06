@@ -1,0 +1,124 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  2.0.1                                 |
+|   \\  /    A nd           | Web:      www.OpenFOAM.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+FoamFile
+{
+    version 2.0;
+    format ascii;
+    class dictionary;
+    object sampleDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+type    sets;
+writeControl    writeTime;
+setFormat raw;
+
+interpolationScheme cellPoint;
+
+fields
+(
+    U
+    T
+    Q
+    k
+    epsilon
+    kt
+);
+
+sets
+(
+    lineX1
+    {
+        type lineCellFace;
+        axis distance;
+        nPoints 10;
+        
+        start (0.043189927 0.0334 0);
+        end (0.0375 0.0510 0);
+    }
+    lineX2
+    {
+        type lineCellFace;
+        axis distance;
+        nPoints 10;
+        
+        start (0.1274 0.0509 0);
+        end (0.1253 0.0685 0);
+    }
+    lineX3
+    {
+        type lineCellFace;
+        axis distance;
+        nPoints 10;
+        
+        start (0.25432989 0.05950046 0);
+        end (0.25390856 0.07709 0);
+    }
+    lineX4
+    {
+        type lineCellFace;
+        axis distance;
+        nPoints 10;
+        
+        start (0.4253 0.0569 0);
+        end (0.4261 0.0745 0);
+    }
+    lineX5
+    {
+        type lineCellFace;
+        axis distance;
+        nPoints 10;
+        
+        start (0.4913 0.0534 0);
+        end (0.4925 0.0710 0);
+    }
+    lineX6
+    {
+        type lineCellFace;
+        axis distance;
+        nPoints 10;
+        
+        start (0.6118 0.0445 0);
+        end (0.6134 0.0621 0);
+    }
+    lineX7
+    {
+        type lineCellFace;
+        axis distance;
+        nPoints 10;
+        
+        start (0.7279 0.0335 0);
+        end (0.7298 0.0511 0);
+    }
+    lineX8
+    {
+        type lineCellFace;
+        axis distance;
+        nPoints 10;
+        
+        start (0.8544 0.0193 0);
+        end (0.8566 0.0369 0);
+    }
+    lineX9
+    {
+        type lineCellFace;
+        axis distance;
+        nPoints 10;
+        
+        start (0.9334 0.0093 0);
+        end (0.9358 0.0269 0);
+    }
+    
+);
+
+surfaces
+(
+);
+
+
+// *********************************************************************** //
