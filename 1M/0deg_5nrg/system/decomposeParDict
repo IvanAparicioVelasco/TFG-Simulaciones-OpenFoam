@@ -1,0 +1,45 @@
+/*--------------------------------*- C++ -*----------------------------------*\
+| =========                 |                                                 |
+| \\      /  F ield         | OpenFOAM: The Open Source CFD Toolbox           |
+|  \\    /   O peration     | Version:  v2106                                 |
+|   \\  /    A nd           | Website:  www.openfoam.com                      |
+|    \\/     M anipulation  |                                                 |
+\*---------------------------------------------------------------------------*/
+
+FoamFile
+{
+    version     2.3;
+    format      ascii;
+    class       dictionary;
+    object      decomposeParDict;
+}
+// * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * //
+
+numberOfSubdomains 6;
+
+method         //simple;
+               scotch;
+               //hierarchical;
+
+simpleCoeffs
+{
+    n               (4 1 1);
+}
+
+hierarchicalCoeffs
+{
+    n               (3 2 1);
+    order           xyz;
+}
+
+scotchCoeffs
+{
+    n               4;
+}
+manualCoeffs
+{
+    dataFile        "cellDecomposition";
+}
+
+
+// ************************************************************************* //
